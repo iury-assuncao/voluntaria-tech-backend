@@ -1,6 +1,6 @@
-import { User } from "../../domain/entities/User";
-import { UserRepository } from "../../domain/interfaces/UserRepository";
-import { UserModel } from "../models/UserModel";
+import { User } from '../../domain/entities/User';
+import { UserRepository } from '../../domain/interfaces/UserRepository';
+import { UserModel } from '../models/UserModel';
 
 export class MongoUserRepository implements UserRepository {
   async findAll(): Promise<User[]> {
