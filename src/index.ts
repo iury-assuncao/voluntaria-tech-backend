@@ -1,8 +1,10 @@
-import express from "express";
+import express from 'express';
+import connectMongoose from './infra/clients/mongoose';
 
 const app = express();
 
 app.use(express.json());
+connectMongoose();
 // app.use("/api", bookRoutes);
 // app.use(errorHandler);
 
