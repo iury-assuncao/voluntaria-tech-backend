@@ -1,4 +1,4 @@
-import { User } from '../../domain/entities/User';
+import { User } from '../../domain/entities/user';
 import { UserRepository } from '../../domain/interfaces/UserRepository';
 import { UserModel } from '../models/UserModel';
 
