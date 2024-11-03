@@ -4,8 +4,8 @@ import { MongoUserRepository } from '../../../infra/repositories/MongoUserReposi
 
 const userRepository = new MongoUserRepository();
 
-export class CreateUserController {
-  async handle(request: Request, response: Response) {
+class CreateUserController {
+  async handle(request: Request, response: Response): Promise<any> {
     const { email, password, userType } = request.body;
 
     const createUserUseCase = new CreateUserUseCase(userRepository);
@@ -19,3 +19,5 @@ export class CreateUserController {
     return response.status(201).json(user);
   }
 }
+
+export { CreateUserController };
