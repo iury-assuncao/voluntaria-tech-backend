@@ -1,8 +1,12 @@
 import { User } from '../domain/entities/user';
+import { Cryptography } from '../domain/interfaces/Cryptography';
 import { UserRepository } from '../domain/interfaces/UserRepository';
 
 export class CreateUserUseCase {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    private userRepository: UserRepository,
+    private cryptography: Cryptography,
+  ) {}
 
   async execute({ email, password, userType }: User) {
     const userAlreadyExists = await this.userRepository.findByEmail(email);
@@ -10,9 +14,12 @@ export class CreateUserUseCase {
     if (userAlreadyExists) {
       throw new Error('Usuário já cadastrado com esse e-mail!');
     }
+
+    const hashedPassword = await this.cryptography.hash(password);
+
     return await this.userRepository.create({
       email,
-      password,
+      password: hashedPassword,
       userType,
     });
   }

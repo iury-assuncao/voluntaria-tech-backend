@@ -2,29 +2,34 @@ import { Response, Request } from 'express';
 import { CreateUserUseCase } from '../../../use-cases/CreateUserUseCase';
 import { MongoUserRepository } from '../../../infra/repositories/MongoUserRepository';
 import { BcryptCryptography } from '../../../infra/helpers/cryptoHelper';
+import { LoginUserUseCase } from '../../../use-cases/auth/LoginUserUseCase';
+import { Jwt } from '../../../infra/helpers/jwtHelper';
+import { CreateUserController } from '../users/CreateUserController';
 
 const userRepository = new MongoUserRepository();
 const crypto = new BcryptCryptography();
+const jwt = new Jwt();
 
-class CreateUserController {
+export class LoginController {
   constructor() {}
-  async handle(request: Request, response: Response): Promise<any> {
+  async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { email, password, userType } = request.body;
 
-      const createUserUseCase = new CreateUserUseCase(userRepository, crypto);
+      const authenticateUserUseCase = new LoginUserUseCase(
+        userRepository,
+        crypto,
+        jwt,
+      );
 
-      const user = await createUserUseCase.execute({
+      const user = await authenticateUserUseCase.execute({
         email,
         password,
-        userType,
       });
 
-      return response.status(201).json(user);
+      return response.status(200).json(user);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });
     }
   }
 }
-
-export { CreateUserController };
