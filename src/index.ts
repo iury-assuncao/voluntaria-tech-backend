@@ -1,11 +1,15 @@
 import express from 'express';
-import connectMongoose from './infra/clients/mongoose';
+import connectMongoose from './infrastructure/clients/mongoose';
 import { routes } from './interface/routes';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
 app.use(express.json());
 app.use(routes);
+
 connectMongoose();
 // app.use("/api", bookRoutes);
 // app.use(errorHandler);

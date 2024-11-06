@@ -4,8 +4,8 @@ import { UserRepository } from '../domain/interfaces/UserRepository';
 
 export class CreateUserUseCase {
   constructor(
-    private userRepository: UserRepository,
-    private cryptography: Cryptography,
+    private readonly userRepository: UserRepository,
+    private readonly cryptography: Cryptography,
   ) {}
 
   async execute({ email, password, userType }: User) {

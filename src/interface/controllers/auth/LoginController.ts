@@ -1,14 +1,12 @@
 import { Response, Request } from 'express';
-import { CreateUserUseCase } from '../../../use-cases/CreateUserUseCase';
-import { MongoUserRepository } from '../../../infra/repositories/MongoUserRepository';
-import { BcryptCryptography } from '../../../infra/helpers/cryptoHelper';
+import { MongoUserRepository } from '../../../infrastructure/repositories/MongoUserRepository';
+import { BcryptCryptography } from '../../../infrastructure/security/cryptoHelper';
 import { LoginUserUseCase } from '../../../use-cases/auth/LoginUserUseCase';
-import { Jwt } from '../../../infra/helpers/jwtHelper';
-import { CreateUserController } from '../users/CreateUserController';
+import { JwtToken } from '../../../infrastructure/security/JwtToken';
 
 const userRepository = new MongoUserRepository();
 const crypto = new BcryptCryptography();
-const jwt = new Jwt();
+const jwt = new JwtToken();
 
 export class LoginController {
   constructor() {}
@@ -16,13 +14,13 @@ export class LoginController {
     try {
       const { email, password, userType } = request.body;
 
-      const authenticateUserUseCase = new LoginUserUseCase(
+      const loginUserUseCase = new LoginUserUseCase(
         userRepository,
         crypto,
         jwt,
       );
 
-      const user = await authenticateUserUseCase.execute({
+      const user = await loginUserUseCase.execute({
         email,
         password,
       });
