@@ -1,4 +1,4 @@
-import { User } from '../../domain/entities/User';
+import { User } from '../../domain/entities/user';
 import { UserRepository } from '../../domain/interfaces/UserRepository';
 import { UserModel } from '../models/UserModel';
 
@@ -10,15 +10,18 @@ export class MongoUserRepository implements UserRepository {
   async findById(id: string): Promise<User | null> {
     return await UserModel.findById(id);
   }
+  async findByEmail(email: string): Promise<User | null> {
+    return await UserModel.findOne({ email: email });
+  }
 
-  async create(User: User): Promise<User> {
-    const newUser = new UserModel(User);
+  async create(user: User): Promise<User> {
+    const newUser = new UserModel(user);
     await newUser.save();
     return newUser;
   }
 
-  async update(User: User): Promise<void> {
-    await UserModel.findByIdAndUpdate(User.id, User);
+  async update(id: string, User: User): Promise<void> {
+    await UserModel.findByIdAndUpdate(id, User);
   }
 
   async delete(id: string): Promise<void> {
