@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import { CreateUserUseCase } from '../../../use-cases/CreateUserUseCase';
 import { MongoUserRepository } from '../../../infrastructure/repositories/MongoUserRepository';
-import { BcryptCryptography } from '../../../infrastructure/security/cryptoHelper';
+import { BcryptCryptography } from '../../../infrastructure/security/crypto';
 
 const userRepository = new MongoUserRepository();
 const crypto = new BcryptCryptography();

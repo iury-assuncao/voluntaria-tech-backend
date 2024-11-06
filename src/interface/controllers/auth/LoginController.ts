@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 import { MongoUserRepository } from '../../../infrastructure/repositories/MongoUserRepository';
-import { BcryptCryptography } from '../../../infrastructure/security/cryptoHelper';
+import { BcryptCryptography } from '../../../infrastructure/security/crypto';
 import { LoginUserUseCase } from '../../../use-cases/auth/LoginUserUseCase';
 import { JwtToken } from '../../../infrastructure/security/JwtToken';
 
@@ -9,10 +9,9 @@ const crypto = new BcryptCryptography();
 const jwt = new JwtToken();
 
 export class LoginController {
-  constructor() {}
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request: Request, response: Response): Promise<any> {
     try {
-      const { email, password, userType } = request.body;
+      const { email, password } = request.body;
 
       const loginUserUseCase = new LoginUserUseCase(
         userRepository,
