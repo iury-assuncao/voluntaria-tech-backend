@@ -15,7 +15,7 @@ export class JwtToken implements Jwtoken {
     try {
       return jwt.verify(token, this.secretKey) as object;
     } catch (error) {
-      console.error('Token verification failed:', error);
+      console.error('Authentication failed:', error);
       return null;
     }
   }
