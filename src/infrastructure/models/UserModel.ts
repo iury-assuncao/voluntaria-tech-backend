@@ -13,4 +13,4 @@ const UserSchema: Schema = new Schema({
   userType: { type: String, required: true, enum: ['volunter', 'ong'] },
 });
 
-export const UserModel = mongoose.model<IUser>('User', UserSchema);
+export const UserModel = mongoose.model<IUser>('user', UserSchema);
