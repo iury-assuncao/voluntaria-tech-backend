@@ -5,7 +5,6 @@ import connectMongoose from './infrastructure/clients/mongoose';
 import cors from 'cors';
 import { routes } from './interface/routes';
 
-
 const app = express();
 
 app.use(express.json());
