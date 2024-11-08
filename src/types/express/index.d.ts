@@ -1,4 +1,4 @@
-import { User } from '../../domain/entities/User'; // Importe o tipo User
+import { User } from '../../domain/entities/user';
 
 declare global {
   namespace Express {
