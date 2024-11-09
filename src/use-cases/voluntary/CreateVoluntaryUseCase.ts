@@ -5,11 +5,11 @@ export class CreateVoluntaryUseCase {
   constructor(private readonly voluntaryRepository: VoluntaryRepository) {}
 
   async execute(voluntary: Voluntary) {
-    const userAlreadyExists = await this.voluntaryRepository.findByCpf(
+    const voluntaryAlreadyExists = await this.voluntaryRepository.findByCpf(
       voluntary.cpf,
     );
 
-    if (userAlreadyExists) {
+    if (voluntaryAlreadyExists) {
       throw new Error('Voluntário já cadastrado com esse CPF!');
     }
 

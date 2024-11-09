@@ -1,12 +1,24 @@
-import { IsString, IsArray, IsOptional, IsNotEmpty, IsMongoId } from 'class-validator';
+import {
+  IsString,
+  IsArray,
+  IsOptional,
+  IsNotEmpty,
+  IsMongoId,
+  Length,
+  Validate,
+} from 'class-validator';
+import { cnpj } from 'cpf-cnpj-validator';
 
 export class CreateOngDTO {
   @IsString()
   @IsNotEmpty({ message: 'O nome é obrigatório' })
   name!: string;
 
-  @IsString()
-  @IsNotEmpty({ message: 'O CNPJ é obrigatório' })
+  @IsNotEmpty({ message: 'O CNPJ é obrigatório.' })
+  @Length(14, 14, { message: 'O CNPJ deve conter exatamente 14 dígitos.' })
+  @Validate((value: string) => cnpj.isValid(value), {
+    message: 'CNPJ inválido.',
+  })
   cnpj!: string;
 
   @IsString()
@@ -18,7 +30,10 @@ export class CreateOngDTO {
   linkImg!: string;
 
   @IsArray({ message: 'Projects deve ser um array' })
-  @IsMongoId({ each: true, message: 'Cada item em projects deve ser um ID válido' })
+  @IsMongoId({
+    each: true,
+    message: 'Cada item em projects deve ser um ID válido',
+  })
   projects!: string[];
 
   @IsString()

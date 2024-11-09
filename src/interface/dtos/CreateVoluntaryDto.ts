@@ -4,15 +4,21 @@ import {
   IsOptional,
   IsNotEmpty,
   IsMongoId,
+  Length,
+  Validate,
 } from 'class-validator';
+import { cpf } from 'cpf-cnpj-validator';
 
 export class CreateVoluntaryDTO {
   @IsString()
   @IsNotEmpty({ message: 'O nome é obrigatório' })
   name!: string;
 
-  @IsString()
-  @IsNotEmpty({ message: 'O CPF é obrigatório' })
+  @IsNotEmpty({ message: 'O CPF é obrigatório.' })
+  @Length(11, 11, { message: 'O CPF deve conter exatamente 11 dígitos.' })
+  @Validate((value: string) => cpf.isValid(value), {
+    message: 'CPF inválido.',
+  })
   cpf!: string;
 
   @IsString()
@@ -42,7 +48,7 @@ export class CreateVoluntaryDTO {
   @IsNotEmpty({ message: 'O campo createdBy é obrigatório' })
   createdBy!: string;
 
-  @IsOptional()
+  @IsNotEmpty({ message: "O userId é obrigatório'" })
   @IsMongoId({ message: 'O userId deve ser um ID válido' })
   userId?: string;
 
