@@ -7,7 +7,6 @@ export class Voluntary {
     public linkImg: string,
     public applications: string[],
     public preferences: string,
-    public createdBy: string,
     public readonly userId?: string,
     public readonly id?: string,
   ) {}

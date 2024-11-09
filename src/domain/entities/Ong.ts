@@ -5,7 +5,6 @@ export class Ong {
     public mission: string,
     public linkImg: string,
     public projects: string[],
-    public createdBy: string,
     public readonly userId?: string,
     public readonly id?: string,
   ) {}

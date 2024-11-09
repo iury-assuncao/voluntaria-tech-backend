@@ -36,10 +36,6 @@ export class CreateOngDTO {
   })
   projects!: string[];
 
-  @IsString()
-  @IsNotEmpty({ message: 'O campo createdBy é obrigatório' })
-  createdBy: string | undefined;
-
   @IsOptional()
   @IsMongoId({ message: 'O userId deve ser um ID válido' })
   userId?: string;

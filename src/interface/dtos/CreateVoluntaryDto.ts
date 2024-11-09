@@ -33,6 +33,7 @@ export class CreateVoluntaryDTO {
   @IsNotEmpty({ message: 'O link da imagem é obrigatório' })
   linkImg!: string;
 
+  @IsOptional()
   @IsArray({ message: 'Applications deve ser um array' })
   @IsMongoId({
     each: true,
@@ -44,15 +45,8 @@ export class CreateVoluntaryDTO {
   @IsNotEmpty({ message: 'As preferências são obrigatórias' })
   preferences!: string;
 
-  @IsString()
-  @IsNotEmpty({ message: 'O campo createdBy é obrigatório' })
-  createdBy!: string;
-
-  @IsNotEmpty({ message: "O userId é obrigatório'" })
+  @IsOptional()
+  @IsNotEmpty({ message: 'O userId é obrigatório' })
   @IsMongoId({ message: 'O userId deve ser um ID válido' })
   userId?: string;
-
-  @IsOptional()
-  @IsMongoId({ message: 'O id deve ser um ID válido' })
-  id?: string;
 }
