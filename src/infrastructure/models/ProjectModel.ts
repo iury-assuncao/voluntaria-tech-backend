@@ -18,7 +18,7 @@ const ProjectSchema = new Schema<IProject>(
     volunteers: [
       { type: Schema.Types.ObjectId, ref: 'voluntary', required: true },
     ],
-    status: { type: String, required: true },
+    status: { type: String, required: true, default: 'AGUARDANDO' },
     DeliveryDate: { type: Date, required: true },
     ongId: { type: Schema.Types.ObjectId, ref: 'ong', required: true },
   },
