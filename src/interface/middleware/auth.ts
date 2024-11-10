@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { JwtToken } from '../../infrastructure/security/JwtToken';
-import { User } from '../../domain/entities/user';
+import { User } from '../../domain/entities';
 
 export function authenticateToken(
   req: Request,

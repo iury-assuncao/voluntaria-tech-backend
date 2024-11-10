@@ -1,4 +1,4 @@
-import { User } from '../domain/entities/user';
+import { User } from '../domain/entities';
 import { Cryptography } from '../domain/interfaces/Cryptography';
 import { UserRepository } from '../domain/interfaces/UserRepository';
 
