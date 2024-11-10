@@ -6,7 +6,6 @@ interface IOng extends Document {
   mission: string;
   linkImg: string;
   projects: Types.ObjectId[];
-  createdBy: string;
   userId?: Types.ObjectId;
 }
 
@@ -16,7 +15,6 @@ const OngSchema: Schema = new Schema({
   mission: { type: String, required: true },
   linkImg: { type: String, required: true },
   projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-  createdBy: { type: String, required: true },
   userId: { type: Schema.Types.ObjectId, ref: 'User', required: false },
 });
 
