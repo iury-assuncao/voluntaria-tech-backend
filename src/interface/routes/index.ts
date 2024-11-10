@@ -6,5 +6,5 @@ const prefix = '/api';
 
 export const routes = Router();
 
-routes.use(`${prefix}/user`, userRoutes);
+routes.use(`${prefix}/`, userRoutes);
 routes.use(`${prefix}/login`, LoginRoutes);
