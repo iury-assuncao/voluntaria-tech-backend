@@ -13,4 +13,7 @@ const createProjectController = new CreateProjectController(
   createProjectUseCase,
 );
 
-projectRoutes.post('/', createProjectController.handle);
+projectRoutes.post(
+  '/',
+  createProjectController.handle.bind(createProjectController),
+);

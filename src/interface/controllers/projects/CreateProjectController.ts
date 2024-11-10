@@ -10,11 +10,10 @@ export class CreateProjectController {
 
   public async handle(request: Request, response: Response): Promise<any> {
     try {
-      console.log(request);
       const createProjectDto = plainToClass(CreateProjectDTO, request.body);
 
       await validateOrReject(createProjectDto);
-      createProjectDto.ongId = 'dwsd';
+      createProjectDto.ongId = '673001e36e7e008b3d5dcd0e';
       const project = await this.createProjectUseCase.execute(createProjectDto);
       return response.status(201).json(project);
     } catch (error: any) {

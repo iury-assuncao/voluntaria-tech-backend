@@ -4,6 +4,9 @@ import {
   IsDate,
   IsOptional,
   IsUrl,
+  IsMongoId,
+  IsArray,
+  IsDateString,
 } from 'class-validator';
 
 export class CreateProjectDTO {
@@ -19,13 +22,19 @@ export class CreateProjectDTO {
   @IsUrl({}, { message: 'O link da comunidade deve ser uma URL válida.' })
   communityLink!: string;
 
-  @IsNotEmpty({ message: 'Os voluntários são obrigatórios.' })
-  @IsString({ message: 'Os voluntários devem ser uma string.' })
-  volunteers!: string;
+  @IsOptional()
+  @IsArray({ message: '.Volunteers deve ser um array' })
+  @IsMongoId({ message: 'Os voluntários devem ser um ser um ID válido.' })
+  volunteers!: string[];
 
   @IsNotEmpty({ message: 'A data de entrega é obrigatória.' })
-  @IsDate({ message: 'A data de entrega deve ser uma data válida.' })
-  DeliveryDate!: Date;
+  @IsDateString(
+    {},
+    {
+      message: 'A data de entrega deve ser uma data válida.',
+    },
+  )
+  deliveryDate!: Date;
 
   @IsOptional()
   @IsString({ message: 'O ID da ONG deve ser uma string.' })
