@@ -38,7 +38,6 @@ class CreateUserController {
           voluntaryRepository,
         );
         const user = await createUserUseCase.execute(createUserDTO);
-        console.log('user', user);
         createVoluntaryDTO.userId = user.id;
 
         const voluntary =
@@ -51,8 +50,10 @@ class CreateUserController {
         await validateOrReject(createOngDTO);
 
         const createOngUseCase = new CreateOngUseCase(ongRepository);
+
         const user = await createUserUseCase.execute(createUserDTO);
         createOngDTO.userId = user.id;
+
         const ong = await createOngUseCase.execute(createOngDTO);
         return response.status(201).json({ user, ong });
       }

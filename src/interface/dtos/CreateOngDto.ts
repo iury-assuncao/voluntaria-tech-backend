@@ -29,6 +29,7 @@ export class CreateOngDTO {
   @IsNotEmpty({ message: 'O link da imagem é obrigatório' })
   linkImg!: string;
 
+  @IsOptional()
   @IsArray({ message: 'Projects deve ser um array' })
   @IsMongoId({
     each: true,

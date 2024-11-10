@@ -4,10 +4,7 @@ import OngModel from '../models/OngModel';
 
 export class MongoOngRepository implements OngRepository {
   findByCnpj(cnpj: string): Promise<Ong | null> {
-    throw new Error('Method not implemented.');
-  }
-  findByCpf(cpf: string): Promise<Ong | null> {
-    return OngModel.findOne({ cpf });
+    return OngModel.findOne({ cnpj });
   }
   async findAll(): Promise<Ong[]> {
     return await OngModel.find();
