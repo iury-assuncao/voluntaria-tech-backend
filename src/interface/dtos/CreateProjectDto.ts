@@ -38,5 +38,5 @@ export class CreateProjectDTO {
 
   @IsOptional()
   @IsString({ message: 'O ID da ONG deve ser uma string.' })
-  ongId!: string;
+  ongId?: string;
 }

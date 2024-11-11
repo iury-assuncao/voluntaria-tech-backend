@@ -1,10 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { JwtToken } from '../../infrastructure/security/JwtToken';
 import { User } from '../../domain/entities';
-
-interface AuthenticatedRequest extends Request {
-  user?: User;
-}
+import { AuthenticatedRequest } from '../types/AuthenticatedRequest';
 
 const jwt = new JwtToken();
 
