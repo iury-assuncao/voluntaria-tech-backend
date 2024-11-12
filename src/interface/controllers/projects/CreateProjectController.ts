@@ -17,7 +17,7 @@ export class CreateProjectController {
       const createProjectDto = plainToClass(CreateProjectDTO, request.body);
 
       await validateOrReject(createProjectDto);
-      createProjectDto.ongId = request.user?.userId as any;
+      createProjectDto.ongId = request.user?.id;
       console.log(request.user);
       const project = await this.createProjectUseCase.execute(createProjectDto);
       return response.status(201).json(project);
