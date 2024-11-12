@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { GetAllVolunteersUseCase } from '../../../use-cases/voluntary/GetAllVolunteersUseCase';
 
-export class GetAllVolunteersController {
+export class GetVoluntaryByIdController {
   constructor(
     private readonly getAllVolunteersUseCase: GetAllVolunteersUseCase,
   ) {}
