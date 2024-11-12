@@ -15,7 +15,7 @@ export class CreateVoluntaryDTO {
   name!: string;
 
   @IsNotEmpty({ message: 'O CPF é obrigatório.' })
-  @Length(11, 11, { message: 'O CPF deve conter exatamente 11 dígitos.' })
+  @Length(14, 14, { message: 'O CPF deve conter 14 dígitos.' })
   @Validate((value: string) => cpf.isValid(value), {
     message: 'CPF inválido.',
   })

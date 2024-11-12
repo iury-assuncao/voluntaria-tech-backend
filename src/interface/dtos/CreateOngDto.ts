@@ -15,7 +15,7 @@ export class CreateOngDTO {
   name!: string;
 
   @IsNotEmpty({ message: 'O CNPJ é obrigatório.' })
-  @Length(14, 14, { message: 'O CNPJ deve conter exatamente 14 dígitos.' })
+  @Length(18, 18, { message: 'O CNPJ deve conter 18 dígitos.' })
   @Validate((value: string) => cnpj.isValid(value), {
     message: 'CNPJ inválido.',
   })

@@ -9,8 +9,7 @@ import { CreateVoluntaryDTO, CreateUserDTO, CreateOngDTO } from '../../dtos';
 import { MongoVoluntaryRepository } from '../../../infrastructure/repositories/MongoVoluntaryRepository';
 import { MongoOngRepository } from '../../../infrastructure/repositories/MongoOngRepository';
 import { CreateOngUseCase } from '../../../use-cases/ong/CreateOngUseCase';
-import { UserTypeEnum } from '../../../domain/enums/UserTypeEnum';
-import { error } from 'console';
+import { UserTypeEnum } from '../../../domain/enums';
 
 const userRepository = new MongoUserRepository();
 const voluntaryRepository = new MongoVoluntaryRepository();
