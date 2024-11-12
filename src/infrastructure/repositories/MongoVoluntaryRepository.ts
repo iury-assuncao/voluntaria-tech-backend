@@ -3,6 +3,9 @@ import { VoluntaryRepository } from '../../domain/interfaces/VoluntaryRepository
 import { VoluntaryModel } from '../models/VoluntaryModel';
 
 export class MongoVoluntaryRepository implements VoluntaryRepository {
+  findByUserId(userId: string): Promise<Voluntary | null> {
+    return VoluntaryModel.findOne({ userId });
+  }
   findByCpf(cpf: string): Promise<Voluntary | null> {
     return VoluntaryModel.findOne({ cpf });
   }

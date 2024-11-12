@@ -1,3 +1,3 @@
 export * from './CreateVoluntaryUseCase';
 export * from './GetAllVolunteersUseCase';
-export * from './GetVoluntaryByIdUseCase';
+export * from './GetVoluntaryByUserIdUseCase';
