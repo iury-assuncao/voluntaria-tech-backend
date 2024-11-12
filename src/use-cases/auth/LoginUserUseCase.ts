@@ -12,7 +12,7 @@ export class LoginUserUseCase {
   async execute(data: {
     email: string;
     password: string;
-  }): Promise<{ token: string; userType: string } | null> {
+  }): Promise<{ token: string; userType: string; id?: string } | null> {
     const user = await this.userRepository.findByEmail(data.email);
     if (!user) throw new Error('E-mail e/ou senha inválido!');
 
@@ -27,6 +27,6 @@ export class LoginUserUseCase {
       userEmai: user.email,
       userType: user.userType,
     });
-    return { token, userType: user.userType };
+    return { token, userType: user.userType, id: user.id };
   }
 }
