@@ -3,6 +3,9 @@ import { OngRepository } from '../../domain/interfaces/OngRepository';
 import OngModel from '../models/OngModel';
 
 export class MongoOngRepository implements OngRepository {
+  findByUserId(userId: string): Promise<Ong | null> {
+    return OngModel.findOne({ userId });
+  }
   findByCnpj(cnpj: string): Promise<Ong | null> {
     return OngModel.findOne({ cnpj });
   }
