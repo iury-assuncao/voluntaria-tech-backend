@@ -8,7 +8,9 @@ export class GetAllVolunteersController {
 
   public async handle(request: Request, response: Response): Promise<any> {
     try {
-      const voluntary = await this.getAllVolunteersUseCase.execute();
+      const voluntary = await this.getAllVolunteersUseCase.execute(
+        request.query,
+      );
       return response.status(200).json(voluntary);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });
