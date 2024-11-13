@@ -19,7 +19,7 @@ export function authenticateToken(
     const decoded = jwt.verifyToken(token);
     req.user = decoded as User;
     next();
-  } catch (error) {
-    res.sendStatus(403);
+  } catch (error: any) {
+    res.status(401).json({ message: 'Authentication Failed' });
   }
 }

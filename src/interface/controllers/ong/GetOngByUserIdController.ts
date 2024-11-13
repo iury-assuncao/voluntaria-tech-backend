@@ -9,6 +9,9 @@ export class GetOngByUserIdController {
       const ong = await this.getOngByUserIdUseCase.execute(
         request.params.userId,
       );
+      if (!ong) {
+        return response.status(400).json({ message: 'Ong não encontrada' });
+      }
       return response.status(200).json(ong);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });
