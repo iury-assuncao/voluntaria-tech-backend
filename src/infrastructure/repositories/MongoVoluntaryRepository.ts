@@ -4,11 +4,11 @@ import { VoluntaryModel } from '../models/VoluntaryModel';
 
 export class MongoVoluntaryRepository implements VoluntaryRepository {
   findOne(filters: Partial<Voluntary>): Promise<Voluntary | null> {
-    return VoluntaryModel.findOne(filters);
+    return VoluntaryModel.findOne(filters).populate('userId') as any;
   }
 
   async findAll(filters: Partial<Voluntary>): Promise<Voluntary[]> {
-    return await VoluntaryModel.find(filters);
+    return (await VoluntaryModel.find(filters).populate('userId')) as any;
   }
 
   async findById(id: string): Promise<Voluntary | null> {

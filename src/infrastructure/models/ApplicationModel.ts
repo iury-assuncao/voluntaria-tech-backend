@@ -1,23 +1,31 @@
 import { Schema, model, Document } from 'mongoose';
 
 export interface IApplication extends Document {
-  voluntaryId: string;
+  voluntaryId?: string;
   status: string;
-  projectId: string;
+  projectId?: string;
   id?: string;
 }
 
 const ApplicationSchema = new Schema<IApplication>(
   {
-    voluntaryId: { type: String, required: true },
+    voluntaryId: {
+      type: Schema.Types.ObjectId,
+      ref: 'voluntary',
+      required: true,
+    },
     status: { type: String, required: true },
-    projectId: { type: String, required: false },
+    projectId: {
+      type: Schema.Types.ObjectId,
+      ref: 'voluntary',
+      required: true,
+    },
   },
   {
     timestamps: true,
   },
 );
 
-const ApplicationModel = model<IApplication>('Application', ApplicationSchema);
+const ApplicationModel = model<IApplication>('application', ApplicationSchema);
 
 export default ApplicationModel;

@@ -28,6 +28,6 @@ const ProjectSchema = new Schema<IProject>(
 );
 
 // Modelo do Mongoose
-const ProjectModel = model<IProject>('Project', ProjectSchema);
+const ProjectModel = model<IProject>('project', ProjectSchema);
 
 export default ProjectModel;

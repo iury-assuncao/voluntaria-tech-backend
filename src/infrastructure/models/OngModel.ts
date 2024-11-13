@@ -14,10 +14,10 @@ const OngSchema: Schema = new Schema({
   cnpj: { type: String, required: true },
   mission: { type: String, required: true },
   linkImg: { type: String, required: true },
-  projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }],
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: false },
+  projects: [{ type: Schema.Types.ObjectId, ref: 'project' }],
+  userId: { type: Schema.Types.ObjectId, ref: 'user', required: false },
 });
 
-const OngModel = mongoose.model<IOng>('Ong', OngSchema);
+const OngModel = mongoose.model<IOng>('ong', OngSchema);
 
 export default OngModel;
