@@ -3,21 +3,12 @@ import { OngRepository } from '../../domain/interfaces/OngRepository';
 import OngModel from '../models/OngModel';
 
 export class MongoOngRepository implements OngRepository {
-  findByUserId(userId: string): Promise<Ong | null> {
-    return OngModel.findOne({ userId });
-  }
-  findByCnpj(cnpj: string): Promise<Ong | null> {
-    return OngModel.findOne({ cnpj });
-  }
-  async findAll(): Promise<Ong[]> {
-    return await OngModel.find();
+  findOne(filters: Partial<Ong>): Promise<Ong | null> {
+    return OngModel.findOne(filters);
   }
 
-  async findById(id: string): Promise<Ong | null> {
-    return await OngModel.findById(id);
-  }
-  async findByEmail(email: string): Promise<Ong | null> {
-    return await OngModel.findOne({ email: email });
+  async findAll(filters: Partial<Ong>): Promise<Ong[]> {
+    return await OngModel.find(filters);
   }
 
   async create(Ong: Ong): Promise<any> {
