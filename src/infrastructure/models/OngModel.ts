@@ -12,7 +12,7 @@ interface IOng extends Document {
 const OngSchema: Schema = new Schema({
   name: { type: String, required: true },
   cnpj: { type: String, required: true },
-  mission: { type: String, required: true },
+  mission: { type: String, required: false },
   linkImg: { type: String, required: true },
   projects: [{ type: Schema.Types.ObjectId, ref: 'project' }],
   userId: { type: Schema.Types.ObjectId, ref: 'user', required: false },

@@ -26,10 +26,6 @@ export class CreateVoluntaryDTO {
   skills!: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'A disponibilidade é obrigatória' })
-  availability!: string;
-
-  @IsString()
   @IsNotEmpty({ message: 'O link da imagem é obrigatório' })
   linkImg!: string;
 
@@ -41,9 +37,8 @@ export class CreateVoluntaryDTO {
   })
   applications!: string[];
 
-  @IsString()
-  @IsNotEmpty({ message: 'As preferências são obrigatórias' })
-  preferences!: string;
+  @IsOptional()
+  description!: string;
 
   @IsOptional()
   @IsNotEmpty({ message: 'O userId é obrigatório' })
