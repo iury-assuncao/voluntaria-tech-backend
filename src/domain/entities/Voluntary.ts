@@ -3,10 +3,9 @@ export class Voluntary {
     public name: string,
     public cpf: string,
     public skills: string,
-    public availability: string,
     public linkImg: string,
+    public description: string,
     public applications: string[],
-    public preferences: string,
     public readonly userId?: string,
     public readonly id?: string,
   ) {}
