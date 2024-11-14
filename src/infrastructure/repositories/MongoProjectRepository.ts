@@ -3,15 +3,16 @@ import { ProjectRepository } from '../../domain/interfaces/ProjectRepository';
 import ProjectModel from '../models/ProjectModel';
 
 export class MongoProjectRepository implements ProjectRepository {
-  findByCnpj(cnpj: string): Promise<Project | null> {
-    return ProjectModel.findOne({ cnpj });
-  }
-  async findAll(): Promise<Project[]> {
-    return await ProjectModel.find();
+  async findAll(filters: Partial<Project>): Promise<Project[]> {
+    return await ProjectModel.find(filters)
+      .populate('ongId')
+      .populate('volunteers');
   }
 
   async findById(id: string): Promise<Project | null> {
-    return await ProjectModel.findById(id);
+    return await ProjectModel.findById(id)
+      .populate('ongId')
+      .populate('volunteers');
   }
 
   async create(Project: Project): Promise<any> {

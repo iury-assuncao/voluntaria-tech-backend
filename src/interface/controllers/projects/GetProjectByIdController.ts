@@ -9,6 +9,9 @@ export class GetProjectByIdController {
       const project = await this.getProjectByIdUseCase.execute(
         request.params.id,
       );
+      if (!project) {
+        return response.status(400).json({ message: 'Projeto não encontrado' });
+      }
       return response.status(200).json(project);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });
