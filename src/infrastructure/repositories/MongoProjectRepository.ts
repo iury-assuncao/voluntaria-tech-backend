@@ -4,15 +4,15 @@ import ProjectModel from '../models/ProjectModel';
 
 export class MongoProjectRepository implements ProjectRepository {
   async findAll(filters: Partial<Project>): Promise<Project[]> {
-    return await ProjectModel.find(filters)
+    return (await ProjectModel.find(filters)
       .populate('ongId')
-      .populate('volunteers');
+      .populate('volunteers')) as any;
   }
 
   async findById(id: string): Promise<Project | null> {
-    return await ProjectModel.findById(id)
+    return (await ProjectModel.findById(id)
       .populate('ongId')
-      .populate('volunteers');
+      .populate('volunteers')) as any;
   }
 
   async create(Project: Project): Promise<any> {

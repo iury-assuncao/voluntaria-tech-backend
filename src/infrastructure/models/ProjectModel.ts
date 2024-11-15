@@ -6,6 +6,7 @@ export interface IProject extends Document {
   communityLink: string;
   volunteers: string[];
   status: string;
+  active: boolean;
   deliveryDate: Date;
   ongId?: string;
 }
@@ -19,6 +20,7 @@ const ProjectSchema = new Schema<IProject>(
       { type: Schema.Types.ObjectId, ref: 'voluntary', required: true },
     ],
     status: { type: String, required: true, default: 'AGUARDANDO' },
+    active: { type: Boolean, required: true, default: true },
     deliveryDate: { type: Date, required: true },
     ongId: { type: Schema.Types.ObjectId, ref: 'ong', required: true },
   },
