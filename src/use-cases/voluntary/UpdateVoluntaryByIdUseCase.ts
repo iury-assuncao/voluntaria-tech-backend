@@ -5,12 +5,11 @@ export class UpdateVoluntaryByIdUseCase {
   constructor(private readonly voluntaryRepository: VoluntaryRepository) {}
 
   async execute(id: string, voluntary: Voluntary) {
-    console.log(id);
     const voluntaryAlreadyExists = await this.voluntaryRepository.findOne({
-      id,
+      _id: id,
     });
 
-    if (voluntaryAlreadyExists) {
+    if (!voluntaryAlreadyExists) {
       throw new Error('Voluntário não encontrado!');
     }
 
