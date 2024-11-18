@@ -5,6 +5,6 @@ export class Application {
     public readonly projectId: string,
     public availability: string,
     public description: string,
-    public readonly id?: string,
+    public readonly _id?: string,
   ) {}
 }

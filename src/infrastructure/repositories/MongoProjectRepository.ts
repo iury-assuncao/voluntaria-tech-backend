@@ -9,8 +9,8 @@ export class MongoProjectRepository implements ProjectRepository {
       .populate('volunteers')) as any;
   }
 
-  async findById(id: string): Promise<Project | null> {
-    return (await ProjectModel.findById(id)
+  async findOne(filters: Partial<Project>): Promise<Project | null> {
+    return (await ProjectModel.findById(filters)
       .populate('ongId')
       .populate('volunteers')) as any;
   }

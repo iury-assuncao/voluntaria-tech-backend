@@ -7,6 +7,6 @@ export class Voluntary {
     public description: string,
     public applications: string[],
     public readonly userId?: string,
-    public readonly id?: string,
+    public readonly _id?: string,
   ) {}
 }

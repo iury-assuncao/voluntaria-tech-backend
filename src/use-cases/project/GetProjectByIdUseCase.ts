@@ -4,6 +4,6 @@ export class GetProjectByIdUseCase {
   constructor(private readonly projectRepository: ProjectRepository) {}
 
   async execute(id: string) {
-    return await this.projectRepository.findById(id);
+    return await this.projectRepository.findOne({ _id: id });
   }
 }
