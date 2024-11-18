@@ -6,8 +6,12 @@ import { UserTypeEnum } from '../../domain/enums';
 import { authenticateToken, permission } from '../middleware';
 import { GetAllProjectsUseCase } from '../../use-cases/project/GetAllProjectsUseCase';
 import { GetAllProjectsController } from '../controllers/projects/GetAllProjectsController';
-import { GetProjectByIdUseCase } from '../../use-cases/project';
+import {
+  GetProjectByIdUseCase,
+  UpdateProjectByIdUseCase,
+} from '../../use-cases/project';
 import { GetProjectByIdController } from '../controllers/projects';
+import { UpdateProjectByIdController } from '../controllers/projects/UpdateProjectByIdController';
 
 export const projectRoutes = Router();
 
@@ -28,6 +32,13 @@ const getProjectByIdController = new GetProjectByIdController(
   getProjectByIdUseCase,
 );
 
+const updateProjectByIdUseCase = new UpdateProjectByIdUseCase(
+  projectRepository,
+);
+const updateProjectByIdController = new UpdateProjectByIdController(
+  updateProjectByIdUseCase,
+);
+
 projectRoutes.post(
   '/',
   authenticateToken,
@@ -45,4 +56,11 @@ projectRoutes.get(
   '/:id',
   authenticateToken,
   getProjectByIdController.handle.bind(getProjectByIdController),
+);
+
+projectRoutes.put(
+  '/:id',
+  authenticateToken,
+  permission(UserTypeEnum.ONG),
+  updateProjectByIdController.handle.bind(updateProjectByIdController),
 );

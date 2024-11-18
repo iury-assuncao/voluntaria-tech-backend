@@ -6,7 +6,6 @@ export interface IApplication extends Document {
   description: string;
   availability: string;
   projectId?: string;
-  id?: string;
 }
 
 const ApplicationSchema = new Schema<IApplication>(
