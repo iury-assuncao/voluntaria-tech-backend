@@ -4,6 +4,6 @@ export class GetOngByUserIdUseCase {
   constructor(private readonly ongRepository: OngRepository) {}
 
   async execute(id: string) {
-    return await this.ongRepository.findByUserId(id);
+    return await this.ongRepository.findOne({ userId: id });
   }
 }

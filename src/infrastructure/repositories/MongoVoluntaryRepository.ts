@@ -3,21 +3,16 @@ import { VoluntaryRepository } from '../../domain/interfaces/VoluntaryRepository
 import { VoluntaryModel } from '../models/VoluntaryModel';
 
 export class MongoVoluntaryRepository implements VoluntaryRepository {
-  findByUserId(userId: string): Promise<Voluntary | null> {
-    return VoluntaryModel.findOne({ userId });
+  findOne(filters: Partial<Voluntary>): Promise<Voluntary | null> {
+    return VoluntaryModel.findOne(filters).populate('userId') as any;
   }
-  findByCpf(cpf: string): Promise<Voluntary | null> {
-    return VoluntaryModel.findOne({ cpf });
-  }
-  async findAll(): Promise<Voluntary[]> {
-    return await VoluntaryModel.find();
+
+  async findAll(filters: Partial<Voluntary>): Promise<Voluntary[]> {
+    return (await VoluntaryModel.find(filters).populate('userId')) as any;
   }
 
   async findById(id: string): Promise<Voluntary | null> {
     return await VoluntaryModel.findById(id);
-  }
-  async findByEmail(email: string): Promise<Voluntary | null> {
-    return await VoluntaryModel.findOne({ email: email });
   }
 
   async create(Voluntary: Voluntary): Promise<any> {

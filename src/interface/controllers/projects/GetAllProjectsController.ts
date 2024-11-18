@@ -6,7 +6,7 @@ export class GetAllProjectsController {
 
   public async handle(request: Request, response: Response): Promise<any> {
     try {
-      const project = await this.getAllProjecstUseCase.execute();
+      const project = await this.getAllProjecstUseCase.execute(request.query);
       return response.status(200).json(project);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });

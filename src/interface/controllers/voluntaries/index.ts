@@ -1,2 +1,2 @@
-export * from './GetVoluntaryByUserIdController';
 export * from './GetAllVolunteersController';
+export * from './GetVoluntaryByUserIdController';

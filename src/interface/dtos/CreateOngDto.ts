@@ -22,7 +22,7 @@ export class CreateOngDTO {
   cnpj!: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'A missão é obrigatória' })
+  @IsOptional()
   mission!: string;
 
   @IsString()

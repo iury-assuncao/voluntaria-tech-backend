@@ -1,12 +1,12 @@
 import {
   IsNotEmpty,
   IsString,
-  IsDate,
   IsOptional,
   IsUrl,
   IsMongoId,
   IsArray,
   IsDateString,
+  IsBoolean,
 } from 'class-validator';
 
 export class CreateProjectDTO {
@@ -39,4 +39,9 @@ export class CreateProjectDTO {
   @IsOptional()
   @IsString({ message: 'O ID da ONG deve ser uma string.' })
   ongId?: string;
+
+
+  @IsOptional()
+  @IsBoolean({ message: 'Active deve ser boolean' })
+  active?: string;
 }

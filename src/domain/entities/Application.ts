@@ -3,6 +3,8 @@ export class Application {
     public voluntaryId: string,
     public status: string,
     public readonly projectId: string,
+    public availability: string,
+    public description: string,
     public readonly id?: string,
   ) {}
 }

@@ -5,9 +5,9 @@ export class CreateOngUseCase {
   constructor(private readonly ongRepository: OngRepository) {}
 
   async execute(ong: Ong) {
-    const voluntaryAlreadyExists = await this.ongRepository.findByCnpj(
-      ong.cnpj,
-    );
+    const voluntaryAlreadyExists = await this.ongRepository.findOne({
+      cnpj: ong.cnpj,
+    });
 
     if (voluntaryAlreadyExists) {
       throw new Error('Ong já cadastrada com esse CNPJ!');

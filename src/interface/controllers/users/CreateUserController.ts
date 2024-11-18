@@ -1,30 +1,23 @@
 import { Response, Request } from 'express';
 import { CreateUserUseCase } from '../../../use-cases/CreateUserUseCase';
 import { CreateVoluntaryUseCase } from '../../../use-cases/voluntary/CreateVoluntaryUseCase';
-import { MongoUserRepository } from '../../../infrastructure/repositories/MongoUserRepository';
-import { BcryptCryptography } from '../../../infrastructure/security/crypto';
 import { validateOrReject, ValidationError } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { CreateVoluntaryDTO, CreateUserDTO, CreateOngDTO } from '../../dtos';
-import { MongoVoluntaryRepository } from '../../../infrastructure/repositories/MongoVoluntaryRepository';
-import { MongoOngRepository } from '../../../infrastructure/repositories/MongoOngRepository';
 import { CreateOngUseCase } from '../../../use-cases/ong/CreateOngUseCase';
 import { UserTypeEnum } from '../../../domain/enums';
 
-const userRepository = new MongoUserRepository();
-const voluntaryRepository = new MongoVoluntaryRepository();
-const ongRepository = new MongoOngRepository();
-const crypto = new BcryptCryptography();
-
 class CreateUserController {
-  constructor() {}
+  constructor(
+    private readonly createUserUseCase: CreateUserUseCase,
+    private readonly createVoluntaryUseCase: CreateVoluntaryUseCase,
+    private readonly createOngUseCase: CreateOngUseCase,
+  ) {}
   async handle(request: Request, response: Response): Promise<any> {
     try {
       const createUserDTO = plainToClass(CreateUserDTO, request.body);
 
       await validateOrReject(createUserDTO);
-
-      const createUserUseCase = new CreateUserUseCase(userRepository, crypto);
 
       if (createUserDTO.userType === UserTypeEnum.VOLUNTARY) {
         const createVoluntaryDTO = plainToClass(
@@ -33,14 +26,11 @@ class CreateUserController {
         );
         await validateOrReject(createVoluntaryDTO);
 
-        const createVoluntaryUseCase = new CreateVoluntaryUseCase(
-          voluntaryRepository,
-        );
-        const user = await createUserUseCase.execute(createUserDTO);
+        const user = await this.createUserUseCase.execute(createUserDTO);
         createVoluntaryDTO.userId = user.id;
 
         const voluntary =
-          await createVoluntaryUseCase.execute(createVoluntaryDTO);
+          await this.createVoluntaryUseCase.execute(createVoluntaryDTO);
         return response.status(201).json({ user, voluntary });
       }
 
@@ -48,12 +38,10 @@ class CreateUserController {
         const createOngDTO = plainToClass(CreateOngDTO, request.body);
         await validateOrReject(createOngDTO);
 
-        const createOngUseCase = new CreateOngUseCase(ongRepository);
-
-        const user = await createUserUseCase.execute(createUserDTO);
+        const user = await this.createUserUseCase.execute(createUserDTO);
         createOngDTO.userId = user.id;
 
-        const ong = await createOngUseCase.execute(createOngDTO);
+        const ong = await this.createOngUseCase.execute(createOngDTO);
         return response.status(201).json({ user, ong });
       }
 
