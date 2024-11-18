@@ -27,7 +27,7 @@ class CreateUserController {
         await validateOrReject(createVoluntaryDTO);
 
         const user = await this.createUserUseCase.execute(createUserDTO);
-        createVoluntaryDTO.userId = user.id;
+        createVoluntaryDTO.userId = user._id;
 
         const voluntary =
           await this.createVoluntaryUseCase.execute(createVoluntaryDTO);
@@ -39,7 +39,7 @@ class CreateUserController {
         await validateOrReject(createOngDTO);
 
         const user = await this.createUserUseCase.execute(createUserDTO);
-        createOngDTO.userId = user.id;
+        createOngDTO.userId = user._id;
 
         const ong = await this.createOngUseCase.execute(createOngDTO);
         return response.status(201).json({ user, ong });

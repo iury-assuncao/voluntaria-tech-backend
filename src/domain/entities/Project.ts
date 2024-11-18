@@ -8,6 +8,6 @@ export class Project {
     public active?: string,
     public readonly ongId?: string,
     public status?: string,
-    public readonly id?: string,
+    public readonly _id?: string,
   ) {}
 }

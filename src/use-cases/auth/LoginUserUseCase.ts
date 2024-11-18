@@ -23,10 +23,10 @@ export class LoginUserUseCase {
     if (!passwordMatch) throw new Error('E-mail e/ou senha inválido!');
 
     const token = this.jwt.generateToken({
-      id: user.id,
+      id: user._id,
       userEmai: user.email,
       userType: user.userType,
     });
-    return { token, userType: user.userType, id: user.id };
+    return { token, userType: user.userType, id: user._id };
   }
 }
