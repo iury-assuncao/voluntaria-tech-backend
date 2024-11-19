@@ -40,6 +40,9 @@ export class CreateProjectDTO {
   @IsString({ message: 'O ID da ONG deve ser uma string.' })
   ongId?: string;
 
+  @IsNotEmpty()
+  @IsString({ message: 'Tipo do projeto é obrigatório.' })
+  type!: string;
 
   @IsOptional()
   @IsBoolean({ message: 'Active deve ser boolean' })
