@@ -15,7 +15,7 @@ const ApplicationSchema = new Schema<IApplication>(
       ref: 'voluntary',
       required: true,
     },
-    status: { type: String, required: true },
+    status: { type: String, required: false, default: 'AGUARDANDO' },
     availability: { type: String, required: true },
     description: { type: String, required: true },
     projectId: {
