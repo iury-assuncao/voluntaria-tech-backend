@@ -3,8 +3,14 @@ import { MongoApplicationRepository } from '../../infrastructure/repositories/Mo
 import {
   CreateApplicationUseCase,
   GetAllApplicationsUseCase,
+  GetApplicationByIdUseCase,
+  UpdateApplicationByIdUseCase,
 } from '../../use-cases/application';
-import { CreateApplicationController } from '../controllers/application';
+import {
+  CreateApplicationController,
+  GetApplicationByIdController,
+  UpdateApplicationByIdController,
+} from '../controllers/application';
 import { GetAllApplicationController } from '../controllers/application/GetAllApplicationsController';
 import { authenticateToken, permission } from '../middleware';
 import { Router } from 'express';
@@ -26,6 +32,21 @@ const getAllApplicationsUseCase = new GetAllApplicationsUseCase(
 const getAllApplicationController = new GetAllApplicationController(
   getAllApplicationsUseCase,
 );
+
+const getApllicationByIdUseCase = new GetApplicationByIdUseCase(
+  mongoApplicationRepository,
+);
+const getApplicationByIdController = new GetApplicationByIdController(
+  getApllicationByIdUseCase,
+);
+
+const updateApplicationByIdUseCase = new UpdateApplicationByIdUseCase(
+  mongoApplicationRepository,
+);
+const updateApplicationByIdController = new UpdateApplicationByIdController(
+  updateApplicationByIdUseCase,
+);
+
 applicationRoutes.post(
   '/',
   authenticateToken,
@@ -37,4 +58,16 @@ applicationRoutes.get(
   '/',
   authenticateToken,
   getAllApplicationController.handle.bind(getAllApplicationController),
+);
+
+applicationRoutes.get(
+  '/:id',
+  authenticateToken,
+  getApplicationByIdController.handle.bind(getApplicationByIdController),
+);
+
+applicationRoutes.put(
+  '/:id',
+  authenticateToken,
+  updateApplicationByIdController.handle.bind(updateApplicationByIdController),
 );

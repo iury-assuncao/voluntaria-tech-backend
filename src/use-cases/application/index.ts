@@ -1,4 +1,4 @@
 export * from './CreateApplicationUseCase';
 export * from './GetAllApplicationsUseCase';
-export * from './GetApllicationByVolunitaryIdUseCase';
-export * from './UpdateAplycationByIdUseCase';
+export * from './GetApllicationByIdUseCase';
+export * from './UpdateApplicationByIdUseCase';
