@@ -4,7 +4,7 @@ export interface IProject extends Document {
   name: string;
   description: string;
   communityLink: string;
-  volunteers: string[];
+  applications: string[];
   status: string;
   active: boolean;
   type: string;
@@ -18,8 +18,8 @@ const ProjectSchema = new Schema<IProject>(
     description: { type: String, required: true },
     communityLink: { type: String, required: true },
     type: { type: String, required: true },
-    volunteers: [
-      { type: Schema.Types.ObjectId, ref: 'voluntary', required: true },
+    applications: [
+      { type: Schema.Types.ObjectId, ref: 'application', required: true },
     ],
     status: { type: String, required: true, default: 'AGUARDANDO' },
     active: { type: Boolean, required: true, default: true },
