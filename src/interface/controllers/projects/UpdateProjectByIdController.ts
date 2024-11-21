@@ -11,12 +11,12 @@ export class UpdateProjectByIdController {
 
   public async handle(request: Request, response: Response): Promise<any> {
     try {
-      const createOngDTO = plainToClass(CreateProjectDTO, request.body);
-      await validateOrReject(createOngDTO);
+      const createProjectDTO = plainToClass(CreateProjectDTO, request.body);
+      await validateOrReject(createProjectDTO);
 
       const project = await this.updateProjectByIdUseCase.execute(
         request.params.id,
-        createOngDTO,
+        createProjectDTO,
       );
 
       return response
