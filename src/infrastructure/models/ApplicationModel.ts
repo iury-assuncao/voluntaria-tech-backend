@@ -20,7 +20,7 @@ const ApplicationSchema = new Schema<IApplication>(
     description: { type: String, required: true },
     projectId: {
       type: Schema.Types.ObjectId,
-      ref: 'voluntary',
+      ref: 'project',
       required: true,
     },
   },

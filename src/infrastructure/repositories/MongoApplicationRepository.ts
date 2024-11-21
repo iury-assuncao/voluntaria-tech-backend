@@ -4,11 +4,15 @@ import ApplicationModel from '../models/ApplicationModel';
 
 export class MongoApplicationRepository implements ApplicationRepository {
   findOne(filters: Partial<Application>): Promise<Application | null> {
-    return ApplicationModel.findOne(filters).populate('userId') as any;
+    return ApplicationModel.findOne(filters)
+      .populate('projectId')
+      .populate('voluntaryId') as any;
   }
 
   async findAll(filters: Partial<Application>): Promise<Application[]> {
-    return (await ApplicationModel.find(filters).populate('userId')) as any;
+    return (await ApplicationModel.find(filters)
+      .populate('projectId')
+      .populate('voluntaryId')) as any;
   }
 
   async create(Application: Application): Promise<any> {
