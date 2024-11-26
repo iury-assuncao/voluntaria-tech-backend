@@ -6,13 +6,13 @@ export class MongoProjectRepository implements ProjectRepository {
   async findAll(filters: Partial<Project>): Promise<Project[]> {
     return (await ProjectModel.find(filters)
       .populate('ongId')
-      .populate('volunteers')) as any;
+      .populate('applications')) as any;
   }
 
-  async findById(id: string): Promise<Project | null> {
-    return (await ProjectModel.findById(id)
+  async findOne(filters: Partial<Project>): Promise<Project | null> {
+    return (await ProjectModel.findById(filters)
       .populate('ongId')
-      .populate('volunteers')) as any;
+      .populate('applications')) as any;
   }
 
   async create(Project: Project): Promise<any> {

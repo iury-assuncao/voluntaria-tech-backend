@@ -6,6 +6,6 @@ export class Ong {
     public linkImg: string,
     public projects: string[],
     public readonly userId?: string,
-    public readonly id?: string,
+    public readonly _id?: string,
   ) {}
 }

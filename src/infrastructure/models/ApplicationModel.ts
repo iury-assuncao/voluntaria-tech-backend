@@ -6,7 +6,6 @@ export interface IApplication extends Document {
   description: string;
   availability: string;
   projectId?: string;
-  id?: string;
 }
 
 const ApplicationSchema = new Schema<IApplication>(
@@ -16,12 +15,12 @@ const ApplicationSchema = new Schema<IApplication>(
       ref: 'voluntary',
       required: true,
     },
-    status: { type: String, required: true },
+    status: { type: String, required: false, default: 'AGUARDANDO' },
     availability: { type: String, required: true },
     description: { type: String, required: true },
     projectId: {
       type: Schema.Types.ObjectId,
-      ref: 'voluntary',
+      ref: 'project',
       required: true,
     },
   },

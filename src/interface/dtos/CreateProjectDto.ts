@@ -23,9 +23,9 @@ export class CreateProjectDTO {
   communityLink!: string;
 
   @IsOptional()
-  @IsArray({ message: '.Volunteers deve ser um array' })
-  @IsMongoId({ message: 'Os voluntários devem ser um ser um ID válido.' })
-  volunteers!: string[];
+  @IsArray({ message: 'Candidaturas deve ser um array' })
+  @IsMongoId({ message: 'As Candidaturas devem ser um ser um ID válido.' })
+  applications!: string[];
 
   @IsNotEmpty({ message: 'A data de entrega é obrigatória.' })
   @IsDateString(
@@ -40,6 +40,9 @@ export class CreateProjectDTO {
   @IsString({ message: 'O ID da ONG deve ser uma string.' })
   ongId?: string;
 
+  @IsNotEmpty()
+  @IsString({ message: 'Tipo do projeto é obrigatório.' })
+  type!: string;
 
   @IsOptional()
   @IsBoolean({ message: 'Active deve ser boolean' })
