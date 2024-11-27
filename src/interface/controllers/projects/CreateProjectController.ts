@@ -24,7 +24,7 @@ export class CreateProjectController {
       const project = await this.createProjectUseCase.execute(createProjectDto);
       if (project._id && project.ongId) {
         await this.updateOngByIdUseCase.execute(project.ongId, {
-          projects: [project._id],
+          $addToSet: { projects: project._id },
         });
       }
       return response.status(201).json(project);
