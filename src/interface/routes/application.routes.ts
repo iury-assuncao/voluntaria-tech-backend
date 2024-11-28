@@ -65,7 +65,7 @@ applicationRoutes.get(
   getApplicationByIdController.handle.bind(getApplicationByIdController),
 );
 
-applicationRoutes.put(
+applicationRoutes.patch(
   '/:id',
   authenticateToken,
   updateStatusApplicationByIdController.handle.bind(

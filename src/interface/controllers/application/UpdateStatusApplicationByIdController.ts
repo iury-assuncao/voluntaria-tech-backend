@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UpdateApplicationByIdUseCase } from '../../../use-cases/application';
+import { StatusApplicationEnum } from '../../../domain/enums';
 
 export class UpdateStatusApplicationByIdController {
   constructor(
@@ -9,9 +10,8 @@ export class UpdateStatusApplicationByIdController {
   public async handle(request: Request, response: Response): Promise<any> {
     try {
       const { status } = request.body;
-
-      if (!status) {
-        throw new Error("O campo 'status' é obrigatório.");
+      if (!Object.values(StatusApplicationEnum).includes(status)) {
+        throw new Error('Status inválido');
       }
       const application = await this.updateApplicationByIdUseCase.execute(
         request.params.id,
