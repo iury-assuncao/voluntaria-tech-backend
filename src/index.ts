@@ -2,13 +2,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import connectMongoose from './infrastructure/clients/mongoose';
-import { routes } from './interface/routes';
+import cors from 'cors';
 
-// Verifique se a chave aparece
+import { routes } from './interface/routes';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(routes);
 
 connectMongoose();

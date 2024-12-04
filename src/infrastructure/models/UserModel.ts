@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 interface IUser {
-  id: string;
+  _id: string;
   email: string;
   password: string;
   userType: string;
@@ -9,8 +9,8 @@ interface IUser {
 
 const UserSchema: Schema = new Schema({
   email: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: true },
   userType: { type: String, required: true, enum: ['volunter', 'ong'] },
 });
 
-export const UserModel = mongoose.model<IUser>('User', UserSchema);
+export const UserModel = mongoose.model<IUser>('user', UserSchema);

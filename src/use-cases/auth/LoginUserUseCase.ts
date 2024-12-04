@@ -9,7 +9,10 @@ export class LoginUserUseCase {
     private readonly jwt: Jwtoken,
   ) {}
 
-  async execute(data: any): Promise<string | null> {
+  async execute(data: {
+    email: string;
+    password: string;
+  }): Promise<{ token: string; userType: string; id?: string } | null> {
     const user = await this.userRepository.findByEmail(data.email);
     if (!user) throw new Error('E-mail e/ou senha inválido!');
 
@@ -20,10 +23,10 @@ export class LoginUserUseCase {
     if (!passwordMatch) throw new Error('E-mail e/ou senha inválido!');
 
     const token = this.jwt.generateToken({
-      userId: user.id,
+      id: user._id,
       userEmai: user.email,
       userType: user.userType,
     });
-    return token;
+    return { token, userType: user.userType, id: user._id };
   }
 }
