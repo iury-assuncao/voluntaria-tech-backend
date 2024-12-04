@@ -4,7 +4,7 @@ import { ApplicationRepository } from '../../domain/interfaces/ApplicationReposi
 export class UpdateApplicationByIdUseCase {
   constructor(private readonly applicationRepository: ApplicationRepository) {}
 
-  async execute(id: string, application: Application) {
+  async execute(id: string, application: Partial<Application>) {
     return await this.applicationRepository.update(id, application);
   }
 }

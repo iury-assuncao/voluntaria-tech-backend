@@ -5,14 +5,28 @@ import ApplicationModel from '../models/ApplicationModel';
 export class MongoApplicationRepository implements ApplicationRepository {
   findOne(filters: Partial<Application>): Promise<Application | null> {
     return ApplicationModel.findOne(filters)
-      .populate('projectId')
-      .populate('voluntaryId') as any;
+      .populate({
+        path: 'projectId',
+        populate: {
+          path: 'ongId',
+          select: 'name linkImg',
+        },
+      })
+      .populate('voluntaryId')
+      .exec() as any;
   }
 
   async findAll(filters: Partial<Application>): Promise<Application[]> {
     return (await ApplicationModel.find(filters)
-      .populate('projectId')
-      .populate('voluntaryId')) as any;
+      .populate({
+        path: 'projectId',
+        populate: {
+          path: 'ongId',
+          select: 'name linkImg',
+        },
+      })
+      .populate('voluntaryId')
+      .exec()) as any;
   }
 
   async create(Application: Application): Promise<any> {

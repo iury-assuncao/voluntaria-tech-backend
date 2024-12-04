@@ -5,9 +5,13 @@ import { plainToClass } from 'class-transformer';
 import { validateOrReject, ValidationError } from 'class-validator';
 import { formatValidationErrors } from '../../utils/ValidationErrorUtil';
 import { AuthenticatedRequest } from '../../types/AuthenticatedRequest';
+import { UpdateOngByIdUseCase } from '../../../use-cases/ong';
 
 export class CreateProjectController {
-  constructor(private readonly createProjectUseCase: CreateProjectUseCase) {}
+  constructor(
+    private readonly createProjectUseCase: CreateProjectUseCase,
+    private readonly updateOngByIdUseCase: UpdateOngByIdUseCase,
+  ) {}
 
   public async handle(
     request: AuthenticatedRequest,
@@ -18,6 +22,11 @@ export class CreateProjectController {
 
       await validateOrReject(createProjectDto);
       const project = await this.createProjectUseCase.execute(createProjectDto);
+      if (project._id && project.ongId) {
+        await this.updateOngByIdUseCase.execute(project.ongId, {
+          $addToSet: { projects: project._id },
+        });
+      }
       return response.status(201).json(project);
     } catch (error: any) {
       if (

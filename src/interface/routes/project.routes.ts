@@ -12,14 +12,19 @@ import {
 } from '../../use-cases/project';
 import { GetProjectByIdController } from '../controllers/projects';
 import { UpdateProjectByIdController } from '../controllers/projects/UpdateProjectByIdController';
+import { UpdateOngByIdUseCase } from '../../use-cases/ong';
+import { MongoOngRepository } from '../../infrastructure/repositories/MongoOngRepository';
 
 export const projectRoutes = Router();
 
 const projectRepository = new MongoProjectRepository();
+const mongoOngRepository = new MongoOngRepository();
 
 const createProjectUseCase = new CreateProjectUseCase(projectRepository);
+const updateOngByIdUseCase = new UpdateOngByIdUseCase(mongoOngRepository);
 const createProjectController = new CreateProjectController(
   createProjectUseCase,
+  updateOngByIdUseCase,
 );
 
 const getAllProjecstUseCase = new GetAllProjectsUseCase(projectRepository);
