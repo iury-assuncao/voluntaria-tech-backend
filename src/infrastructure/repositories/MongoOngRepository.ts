@@ -4,11 +4,15 @@ import OngModel from '../models/OngModel';
 
 export class MongoOngRepository implements OngRepository {
   findOne(filters: Partial<Ong>): Promise<Ong | null> {
-    return OngModel.findOne(filters).populate('userId') as any;
+    return OngModel.findOne(filters)
+      .populate('userId')
+      .populate('projects') as any;
   }
 
   async findAll(filters: Partial<Ong>): Promise<Ong[]> {
-    return (await OngModel.find(filters).populate('userId')) as any;
+    return (await OngModel.find(filters)
+      .populate('userId')
+      .populate('projects')) as any;
   }
 
   async create(Ong: Ong): Promise<any> {

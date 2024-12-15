@@ -15,7 +15,7 @@ export class GetAllApplicationController {
       const application = await this.getAllApplicationsUseCase.execute(
         request.query,
       );
-      return response.status(201).json(application);
+      return response.status(200).json(application);
     } catch (error: any) {
       return response.status(400).json({ message: error.message });
     }

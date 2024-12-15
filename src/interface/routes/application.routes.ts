@@ -9,7 +9,7 @@ import {
 import {
   CreateApplicationController,
   GetApplicationByIdController,
-  UpdateApplicationByIdController,
+  UpdateStatusApplicationByIdController,
 } from '../controllers/application';
 import { GetAllApplicationController } from '../controllers/application/GetAllApplicationsController';
 import { authenticateToken, permission } from '../middleware';
@@ -43,9 +43,8 @@ const getApplicationByIdController = new GetApplicationByIdController(
 const updateApplicationByIdUseCase = new UpdateApplicationByIdUseCase(
   mongoApplicationRepository,
 );
-const updateApplicationByIdController = new UpdateApplicationByIdController(
-  updateApplicationByIdUseCase,
-);
+const updateStatusApplicationByIdController =
+  new UpdateStatusApplicationByIdController(updateApplicationByIdUseCase);
 
 applicationRoutes.post(
   '/',
@@ -66,8 +65,10 @@ applicationRoutes.get(
   getApplicationByIdController.handle.bind(getApplicationByIdController),
 );
 
-applicationRoutes.put(
+applicationRoutes.patch(
   '/:id',
   authenticateToken,
-  updateApplicationByIdController.handle.bind(updateApplicationByIdController),
+  updateStatusApplicationByIdController.handle.bind(
+    updateStatusApplicationByIdController,
+  ),
 );
